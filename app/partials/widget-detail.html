@@ -1,0 +1,48 @@
+<div class="container widget-detail">
+
+	<a href="#/widgets">Back to instance list</a>
+
+	<h2>Details for: {{widgetSetting.name}}</h2>
+	<div class="row">
+		<div class="col-md-8">
+			<dt>Instance ID</dt>
+				<dd>{{widgetSetting.id}}</dd>
+			<dt>Instance Mode</dt>
+				<dd>{{widgetSetting.settings.mode}}</dd>
+			<dt>Instance Sorting</dt>
+				<dd>{{widgetSetting.settings.sorting}}</dd>
+			<dt>Instance Source</dt>
+				<dd>{{widgetSetting.type}}</dd>
+		</div>
+		<div class="col-md-4">
+			<dt>Widget Style Name</dt>
+				<dd>{{widgetSetting.name}}</dd>
+			<dt>Widget Style</dt>
+				<dd>{{widgetSetting.type}}</dd>
+		</div>
+	</div>
+
+	<button ng-click="createGist()">Create gist</button>
+
+	<button ng-click="toggleCode()">Toggle Code Output</button>
+
+
+
+<textarea ng-hide="code" ng-animate="'animate'">
+
+{{generatedCode}}
+
+</textarea>
+
+	<br />
+	<div ng-show="gistStatus == 'success'">
+		<i class="fa fa-check"></i> Success!: <a href="{{gistLink}}" target="_blank">{{gistLink}}</a>
+	</div>
+	<br />
+
+	<h3>Widget Preview</h3>
+
+	<div class="widget-preview">
+		<div class="olapic-container" olapic-widget instance="{{widgetSetting.id}}" target="olapicWidget" mode="development"></div>
+	</div>
+</div>
