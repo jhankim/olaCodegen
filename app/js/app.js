@@ -11,8 +11,8 @@ var codegenApp = angular.module('codegenApp', [
 
 codegenApp.factory('AuthKeys', function() {
   return {
-      olapic : '',
-      github : ''
+      olapic : 'f48eeae508d1b1f3133df366679eb2b567bae5dc8058d69d679dc5cb140eb857',
+      github : 'd0ba313ad6893a528bbb54ac6a651efd99390477'
   };
 });
 
