@@ -3,8 +3,27 @@
 /* Controllers */
 var codegenControllers = angular.module('codegenControllers', []);
 
-codegenControllers.controller('WidgetListCtrl', ['$scope', '$http', 'widgetListData',
-	function ($scope, $http, widgetListData) {
+codegenControllers.controller('WidgetListCtrl', ['$scope', '$http', 'widgetListData', 'AuthKeys',
+	function ($scope, $http, widgetListData, AuthKeys) {
+
+		function randomString(length, chars) {
+		    var result = '';
+		    for (var i = length; i > 0; --i) result += chars[Math.round(Math.random() * (chars.length - 1))];
+		    return result;
+		}
+		var rString = randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+
+
+		$scope.performOAuth = function (){
+			OAuth.initialize(AuthKeys.client);
+
+			OAuth.popup('github', {'state':rString}, function(error, success){
+			  // See the result below
+			  console.log(error);
+			  console.log(success);
+			});
+
+		}
 
 		$scope.widgets = widgetListData.data._embedded.widgetinstance;
 

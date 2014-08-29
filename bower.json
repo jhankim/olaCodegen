@@ -1,8 +1,8 @@
 {
-  "name": "angular-phonecat",
-  "description": "A starter project for AngularJS",
+  "name": "Olapic Widget Instance Manager",
+  "description": "A simple app for Olapic widget instance management",
   "version": "0.0.0",
-  "homepage": "https://github.com/angular/angular-phonecat",
+  "homepage": "https://github.com/jaepanda/olaCodeGen",
   "license": "MIT",
   "private": true,
   "dependencies": {
@@ -11,6 +11,8 @@
     "angular-route": "~1.2.x",
     "jquery": "1.10.2",
     "bootstrap": "~3.1.1",
-    "angular-http-loader": "~0.1.1"
+    "angular-http-loader": "~0.1.1",
+    "angular-loading-bar": "~0.5.1",
+    "oauth-js": "~0.2.4"
   }
 }
