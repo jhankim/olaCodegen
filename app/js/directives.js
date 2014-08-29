@@ -1,6 +1,8 @@
 'use strict';
 
 /* Directives */
+
+// Olapic Directive
 codegenApp.directive('olapicWidget', ['AuthKeys', function(AuthKeys) {
  
   return {
