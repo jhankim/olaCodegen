@@ -17,10 +17,27 @@ codegenControllers.controller('WidgetListCtrl', ['$scope', '$http', 'widgetListD
 		$scope.performOAuth = function (){
 			OAuth.initialize(AuthKeys.client);
 
-			OAuth.popup('github', {'state':rString}, function(error, success){
-			  // See the result below
-			  console.log(error);
-			  console.log(success);
+			// OAuth.popup('github', {'state':rString}, function(error, success){
+			//   // See the result below
+			//   console.log(error);
+			//   console.log(success);
+			// });
+
+			var provider = 'github';
+
+			OAuth.popup(provider, {'state':rString})
+			.done(function(result) {
+				console.log(result);
+			    result.me()
+			    .done(function (response) {
+			        console.log(response);
+			    })
+			    .fail(function (err) {
+			        //handle error with err
+			    });
+			})
+			.fail(function (err) {
+			    //handle error with err
 			});
 
 		}

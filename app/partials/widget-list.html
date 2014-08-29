@@ -11,7 +11,10 @@
 			</select>
 
 			<hr>
-			<button ng-click="performOAuth()">hello</button>
+
+			<a ng-click="performOAuth()" class="btn btn-block btn-social btn-github" ng-show="userState != 'success'">
+            	<i class="fa fa-github"></i> Sign in with GitHub
+          	</a>
 
 		</div>
 		<div class="col-md-10">
