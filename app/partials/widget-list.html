@@ -2,13 +2,20 @@
 	<div class="row">
 		<div class="col-md-2">
 			<!--Sidebar content-->
-			Search: <input ng-model="query">
-			<br />
-			Sort by:
-			<select ng-model="orderProp">
-				<option value="name">Alphabetical</option>
-				<option value="age">Newest</option>
-			</select>
+
+			<!-- logo -->
+			<img src="img/logo-200x62.png" class="sidebar-logo" />
+
+			<hr>
+
+			<!-- search bar -->
+			<form role="form">
+				<div class="form-group">
+					<label>Search for instance name</label>
+					<input ng-model="query" type="search" class="form-control" placeholder="e.g., Homepage widget">
+				</div>
+			</form>
+
 		</div>
 		<div class="col-md-10">
 			<!--Body content-->

@@ -3,8 +3,8 @@
 /* Controllers */
 var codegenControllers = angular.module('codegenControllers', []);
 
-codegenControllers.controller('WidgetListCtrl', ['$scope', '$http', 'widgetListData',
-	function ($scope, $http, widgetListData) {
+codegenControllers.controller('WidgetListCtrl', ['$scope', '$http', 'widgetListData', 'AuthKeys',
+	function ($scope, $http, widgetListData, AuthKeys) {
 
 		$scope.widgets = widgetListData.data._embedded.widgetinstance;
 
@@ -81,34 +81,63 @@ codegenControllers.controller('WidgetDetailCtrl', ['$scope', '$routeParams', 'Au
 			$scope.generatedCode = partOne + partTwoDynamic;
 		}
 
-		
-
 		var generatedCode = $scope.generatedCode;
 		$scope.gistStatus = [];
 
+		// Random String Generator
+		function randomString(length, chars) {
+		    var result = '';
+		    for (var i = length; i > 0; --i) result += chars[Math.round(Math.random() * (chars.length - 1))];
+		    return result;
+		}
+		var rString = randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+
+		OAuth.initialize(AuthKeys.client);
+
 		$scope.createGist = function(generatedCode){
-	        $http.post('https://api.github.com/gists?access_token='+AuthKeys.github, 
-	        	{
-					"description": "the description for this gist",
-					"public": false,
-					"files": {
-						"instructions.md": {
-				    		"content": $scope.generatedCode
-				    	}
-				  	}
-				})
-	        .success(function(data, status, headers, config) {
-	            if (data.msg != '') {
-	                $scope.gistStatus = 'success';
-	            	$scope.gistLink = 'http://gist.github.com/' + data.owner.login + '/' + data.id;
-	            } else {
-	            	$scope.gistStatus = 'warning';
-	            }
-	        })
-	        .error(function(data, status) { // called asynchronously if an error occurs
-	            // or server returns response with an error status.
-	            $scope.gistStatus = 'error';
-	        });
+
+			var provider = 'github';
+
+			OAuth.popup(provider, {'state':rString})
+			.done(function(result) {
+
+				console.log(result);
+
+		        $http.post('https://api.github.com/gists?access_token=' + result.access_token, 
+		        	{
+						"description": "This gist is automatically generated for " + $scope.widgetSetting._embedded.customer.name,
+						"public": false,
+						"files": {
+							"instructions.md": {
+					    		"content": $scope.generatedCode
+					    	}
+					  	}
+					})
+		        .success(function(data, status, headers, config) {
+		            if (data.msg != '') {
+		                $scope.gistStatus = 'success';
+		            	$scope.gistLink = 'http://gist.github.com/' + data.owner.login + '/' + data.id;
+		            } else {
+		            	$scope.gistStatus = 'warning';
+		            }
+		        })
+		        .error(function(data, status) { // called asynchronously if an error occurs
+		            // or server returns response with an error status.
+		            $scope.gistStatus = 'error';
+		        });
+
+			    result.me()
+			    .done(function (response) {
+			        console.log(response);
+			    })
+			    .fail(function (err) {
+			        //handle error with err
+			    });
+			})
+			.fail(function (err) {
+			    //handle error with err
+			});
+
 		};
 
 		// Handle external file load

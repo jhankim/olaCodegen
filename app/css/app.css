@@ -4,6 +4,10 @@ body {
   padding-top: 20px;
 }
 
+/**
+ * Content stucc
+ */
+
 .widget-detail textarea {
 	position: relative;
 	width: 100%;
@@ -12,14 +16,21 @@ body {
 	float: none;
 }
 
+.sidebar-logo {
+  width: 100%;
+}
+
+.gist-success {
+  margin-top: 20px;
+}
+
+#code-output {
+  margin-top: 20px;
+}
+
+
 /**
- * For modern browsers
- * 1. The space content is one way to avoid an Opera bug when the
- *    contenteditable attribute is included anywhere else in the document.
- *    Otherwise it causes space to appear at the top and bottom of elements
- *    that are clearfixed.
- * 2. The use of `table` rather than `block` is only necessary if using
- *    `:before` to contain the top-margins of child elements.
+ * Clearfix
  */
 .cf:before,
 .cf:after {
@@ -32,15 +43,30 @@ body {
 }
 
 /**
- * For IE 6/7 only
- * Include this rule to trigger hasLayout and contain floats.
+ * Angular Stuff
  */
-.cf {
-    *zoom: 1;
-}
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
+}
+
+/**
+ * Animation
+ */
+
+body #loading-bar-spinner {
+  display: block;
+  position: fixed;
+  z-index: 10002;
+  top: 50%;
+  left: 50%;
+  margin: -60px 0 0 -60px;
+}
+
+body #loading-bar-spinner .spinner-icon {
+  width: 120px;
+  height: 120px;
+  border-radius: 120px;
 }
 
 .view-animate {
@@ -55,17 +81,18 @@ body {
   bottom: 0;
   z-index: 5;
 }
+
 .view-animate.ng-enter {
-  -webkit-animation: fadeIn 1s;
-  -moz-animation: fadeIn 1s;
-  -ms-animation: fadeIn 1s;
-  animation: fadeIn 1s;
+  -webkit-animation: fadeIn 750ms;
+  -moz-animation: fadeIn 750ms;
+  -ms-animation: fadeIn 750ms;
+  animation: fadeIn 750ms;
 }
 .view-animate.ng-leave {
-  -webkit-animation: fadeOut 1s;
-  -moz-animation: fadeOut 1s;
-  -ms-animation: fadeOut 1s;
-  animation: fadeOut 1s;
+  -webkit-animation: fadeOut 750ms;
+  -moz-animation: fadeOut 750ms;
+  -ms-animation: fadeOut 750ms;
+  animation: fadeOut 750ms;
 }
 
 .animate-show {

@@ -7,12 +7,13 @@ var codegenApp = angular.module('codegenApp', [
 	'codegenControllers',
 	'ngAnimate',
 	'angular-loading-bar',
+	'oauth.io'
 ]);
 
 codegenApp.factory('AuthKeys', function() {
   return {
-      olapic : 'f48eeae508d1b1f3133df366679eb2b567bae5dc8058d69d679dc5cb140eb857',
-      github : 'd0ba313ad6893a528bbb54ac6a651efd99390477'
+  		client : 'b0da9_aYCOR1GaFmzaG46rzLuSc', // OAuth.io pub key
+		olapic : 'f48eeae508d1b1f3133df366679eb2b567bae5dc8058d69d679dc5cb140eb857' // Olapic API key
   };
 });
 
@@ -59,4 +60,13 @@ codegenApp.config(['$routeProvider',
 			redirectTo: '/widgets'
 		});
 	}
-]);
+],
+function(OAuthProvider) {
+  OAuthProvider.setHandler('facebook', function (OAuthData, $http) {
+    $http.get('https://graph.facebook.com/me?access_token=' + OAuthData.result.access_token)
+      .then(function (resp) {
+        console.log(resp);
+      });
+    });
+}
+);

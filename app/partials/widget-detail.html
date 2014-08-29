@@ -2,6 +2,8 @@
 
 	<a href="#/widgets">Back to instance list</a>
 
+	<hr>
+
 	<h2>Details for: {{widgetSetting.name}}</h2>
 	<div class="row">
 		<div class="col-md-8">
@@ -22,25 +24,23 @@
 		</div>
 	</div>
 
-	<button ng-click="createGist()">Create gist</button>
+	<hr>
 
-	<button ng-click="toggleCode()">Toggle Code Output</button>
+	<button type="button" class="btn btn-primary" ng-click="createGist()">Create gist</button>
 
+	<button type="button" class="btn btn-default" slide-toggle="#code-output">Toggle Code Output</button>
 
-
-<textarea ng-hide="code" class="animate-show">
-
-{{generatedCode}}
-
-</textarea>
-
-	<br />
-	<div ng-show="gistStatus == 'success'">
-		<i class="fa fa-check"></i> Success!: <a href="{{gistLink}}" target="_blank">{{gistLink}}</a>
+	<div id="code-output" class="slideable" easing="easing" duration="500ms">
+		<pre class="code-output"><p>{{generatedCode}}</p></pre>
 	</div>
-	<br />
 
-	<h3>Widget Preview</h3>
+	<div ng-show="gistStatus == 'success'" class="alert alert-success gist-success" role="alert">
+		<span class="label label-success"><i class="fa fa-check"></i> Success!</span> You can access the generated guide here: <a href="{{gistLink}}" target="_blank">{{gistLink}}</a>
+	</div>
+
+	<hr>
+
+	<h2>Widget Preview</h2>
 
 	<div class="widget-preview">
 		<div class="olapic-container" olapic-widget instance="{{widgetSetting.id}}" target="olapicWidget" mode="development"></div>
