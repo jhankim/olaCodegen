@@ -4,12 +4,20 @@ body {
   padding-top: 20px;
 }
 
+/**
+ * Content stucc
+ */
+
 .widget-detail textarea {
 	position: relative;
 	width: 100%;
 	height: 400px;
 	clear: both;
 	float: none;
+}
+
+.sidebar-logo {
+  width: 100%;
 }
 
 .gist-success {
@@ -34,8 +42,31 @@ body {
     clear: both;
 }
 
+/**
+ * Angular Stuff
+ */
+
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
+}
+
+/**
+ * Animation
+ */
+
+#loading-bar-spinner {
+  display: block;
+  position: fixed;
+  z-index: 10002;
+  top: 50%;
+  left: 50%;
+  margin: -75px 0 0 -75px;
+}
+
+#loading-bar-spinner .spinner-icon {
+  width: 150px;
+  height: 150px;
+  border-radius: 150px;
 }
 
 .view-animate {
@@ -50,6 +81,7 @@ body {
   bottom: 0;
   z-index: 5;
 }
+
 .view-animate.ng-enter {
   -webkit-animation: fadeIn 750ms;
   -moz-animation: fadeIn 750ms;
