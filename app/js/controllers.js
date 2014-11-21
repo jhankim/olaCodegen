@@ -3,8 +3,31 @@
 /* Controllers */
 var codegenControllers = angular.module('codegenControllers', []);
 
-codegenControllers.controller('HomeCtrl', ['$scope', '$http',
-	function ($scope, $http) {
+codegenControllers.controller('HomeCtrl', ['$scope', '$http', '$location','$cookieStore',
+	function ($scope, $http, $location, $cookieStore) {
+
+
+  // Get cookie
+  	if ( $cookieStore.get('ola_apikey') ) {
+  		$cookieStore.remove('ola_apikey');
+  	}
+
+		$scope.auth_apikey = "1f6da15fd360ed792faa8cc5c5c3e324f7e2cea031c1c9f020becaf8ccbe3e78";
+      $scope.submit = function() {
+        
+		$http.get('//photorankapi-a.akamaihd.net/?auth_token=' + $scope.auth_apikey).
+		  success(function(data, status, headers, config) {
+		    if ( data.metadata.code == 200 ) {
+		    	$cookieStore.put('ola_apikey',$scope.auth_apikey);
+		    	console.log($scope.auth_apikey);
+		    	$location.path('/widgets');
+				$location.replace();
+		    }
+		  }).
+		  error(function(data, status, headers, config) {
+		    console.log(status);
+		  });
+      };
 
 	}
 ]);
