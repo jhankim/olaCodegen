@@ -3,6 +3,7 @@
 /* App Module */
 
 var codegenApp = angular.module('codegenApp', [
+	'ngCookies',
 	'ngRoute',
 	'codegenControllers',
 	'ngAnimate',
@@ -13,7 +14,6 @@ var codegenApp = angular.module('codegenApp', [
 codegenApp.factory('AuthKeys', function() {
   return {
   		client : 'b0da9_aYCOR1GaFmzaG46rzLuSc', // OAuth.io pub key
-		olapic : '' // Olapic API key
   };
 });
 
@@ -32,12 +32,16 @@ codegenApp.config(['$routeProvider',
 			templateUrl: 'partials/widget-list.html',
 			controller: 'WidgetListCtrl',
 			resolve: {
-				widgetListData: ['$http', 'AuthKeys',function($http, AuthKeys) {
+				widgetListData: ['$http', '$cookieStore', 'AuthKeys' , '$location',function($http, $cookieStore, $location) {
 
-					return $http.get('http://photorankapi-a.akamaihd.net/customers/1/widgets?auth_token='+AuthKeys.olapic+'&version=v2.2&count=50')
+					return $http.get('http://photorankapi-a.akamaihd.net/customers/1/widgets?auth_token='+$cookieStore.get('ola_apikey')+'&version=v2.2&count=50')
 					.then(
-						function success(response) { return response.data; },
-						function error(reason)     { return false; }
+						function success(response) { 
+							return response.data; 
+						},
+						function error(reason)     { 
+							return false; 
+						}
 					);
 
 				}
@@ -49,9 +53,9 @@ codegenApp.config(['$routeProvider',
 			templateUrl: 'partials/widget-detail.html',
 			controller: 'WidgetDetailCtrl',
 			resolve: {
-				widgetDetailData: ['$http','$route','AuthKeys',function($http, $route, AuthKeys) {
+				widgetDetailData: ['$http','$route','AuthKeys','$cookieStore',function($http, $route, AuthKeys, $cookieStore) {
 
-					return $http.get('http://photorankapi-a.akamaihd.net/widgets/' + $route.current.params.widgetId + '?auth_token='+AuthKeys.olapic+'&version=v2.2&count=50')
+					return $http.get('http://photorankapi-a.akamaihd.net/widgets/' + $route.current.params.widgetId + '?auth_token='+$cookieStore.get('ola_apikey')+'&version=v2.2&count=50')
 					.then(
 						function success(response) { return response.data; },
 						function error(reason)     { return false; }

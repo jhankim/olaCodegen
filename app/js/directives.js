@@ -3,7 +3,7 @@
 /* Directives */
 
 // Olapic Directive
-codegenApp.directive('olapicWidget', ['AuthKeys', function(AuthKeys) {
+codegenApp.directive('olapicWidget', ['AuthKeys', '$cookieStore', function(AuthKeys, $cookieStore) {
  
   return {
     restrict: 'A',
@@ -27,7 +27,7 @@ codegenApp.directive('olapicWidget', ['AuthKeys', function(AuthKeys) {
  
       function renderOlapic() {
  
-        OlapicSDK.conf.set('apikey', AuthKeys.olapic);
+        OlapicSDK.conf.set('apikey', $cookieStore.get('ola_apikey'));
         
         if(attr.mode) {
           OlapicSDK.conf.set('mode', attr.mode);

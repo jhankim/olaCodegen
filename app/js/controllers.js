@@ -6,20 +6,19 @@ var codegenControllers = angular.module('codegenControllers', []);
 codegenControllers.controller('HomeCtrl', ['$scope', '$http', '$location','$cookieStore',
 	function ($scope, $http, $location, $cookieStore) {
 
-
-  // Get cookie
-  	if ( $cookieStore.get('ola_apikey') ) {
-  		$cookieStore.remove('ola_apikey');
-  	}
+		if ( $cookieStore.get('ola_apikey') ) {
+			$cookieStore.remove('ola_apikey');
+		}
 
 		$scope.auth_apikey = "1f6da15fd360ed792faa8cc5c5c3e324f7e2cea031c1c9f020becaf8ccbe3e78";
-      $scope.submit = function() {
+
+		$scope.submit = function() {
         
 		$http.get('//photorankapi-a.akamaihd.net/?auth_token=' + $scope.auth_apikey).
 		  success(function(data, status, headers, config) {
 		    if ( data.metadata.code == 200 ) {
 		    	$cookieStore.put('ola_apikey',$scope.auth_apikey);
-		    	console.log($scope.auth_apikey);
+
 		    	$location.path('/widgets');
 				$location.replace();
 		    }
@@ -32,8 +31,15 @@ codegenControllers.controller('HomeCtrl', ['$scope', '$http', '$location','$cook
 	}
 ]);
 
-codegenControllers.controller('WidgetListCtrl', ['$scope', '$http', 'widgetListData', 'AuthKeys',
-	function ($scope, $http, widgetListData, AuthKeys) {
+codegenControllers.controller('WidgetListCtrl', ['$scope', '$http', 'widgetListData', 'AuthKeys', '$cookieStore', '$location',
+	function ($scope, $http, widgetListData, AuthKeys, $cookieStore, $location) {
+
+		if ( !$cookieStore.get('ola_apikey') ) {
+			console.log('no cookie');
+			$location.path('/home');
+			$location.replace();
+			return false;
+		}
 
 		$scope.widgets = widgetListData.data._embedded.widgetinstance;
 
@@ -42,8 +48,15 @@ codegenControllers.controller('WidgetListCtrl', ['$scope', '$http', 'widgetListD
 	}
 ]);
 
-codegenControllers.controller('WidgetDetailCtrl', ['$scope', '$routeParams', 'AuthKeys' , 'widgetDetailData' , '$http',
-	function($scope, $routeParams, AuthKeys, widgetDetailData, $http) {
+codegenControllers.controller('WidgetDetailCtrl', ['$scope', '$routeParams', 'AuthKeys' , 'widgetDetailData' , '$http', '$cookieStore',
+	function($scope, $routeParams, AuthKeys, widgetDetailData, $http, $cookieStore) {
+
+		if ( !$cookieStore.get('ola_apikey') ) {
+			console.log('no cookie');
+			$location.path('/home');
+			$location.replace();
+			return false;
+		}
 
 		// Toggle textarea
         $scope.code = true;
@@ -77,7 +90,7 @@ codegenControllers.controller('WidgetDetailCtrl', ['$scope', '$routeParams', 'Au
 			"	src=\"//photorankstatics-a.akamaihd.net/81b03e40475846d5883661ff57b34ece/static/frontend/latest/build.min.js\"",
 			"	data-olapic=\"olapic_specific_widget\"",
 			"	data-instance=\"" + $scope.widgetSetting.id + "\"",
-			"	data-apikey=\"" + AuthKeys.olapic + "\"",
+			"	data-apikey=\"" + $cookieStore.get('ola_apikey') + "\"",
 			"	async=\"async\">",
 			"</script>",
 			"```"
@@ -93,7 +106,7 @@ codegenControllers.controller('WidgetDetailCtrl', ['$scope', '$routeParams', 'Au
 			"	src=\"//photorankstatics-a.akamaihd.net/81b03e40475846d5883661ff57b34ece/static/frontend/latest/build.min.js\"",
 			"	data-olapic=\"olapic_specific_widget\"",
 			"	data-instance=\"" + $scope.widgetSetting.id + "\"",
-			"	data-apikey=\"" + AuthKeys.olapic + "\"",
+			"	data-apikey=\"" + $cookieStore.get('ola_apikey') + "\"",
 			"	data-tags=\"INSERT_PRODUCT_ID_HERE\"",
 			"	async=\"async\">",
 			"</script>",
