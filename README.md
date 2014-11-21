@@ -14,23 +14,13 @@ This application allows you to view a list of widget instances available in your
   git clone git@github.com:jaepanda/olaCodegen.git
   ```
 
-2. Place in your Olapic API key & GitHub API auth key in `app/js/app.js` file. Line 16 to be exact:
-
-  ```js
-  codegenApp.factory('AuthKeys', function() {
-      ...
-  		olapic : 'XXX' // Replace XXX with your Olapic API key
-    };
-  });
-  ```
-
-3. Run `npm install`
+2. Run `npm install`
 
   ```sh
   npm install
   ```
 
-4. After npm installs all dependencies, run `npm start` to run the local server
+3. After npm installs all dependencies, run `npm start` to run the local server
 
   ```sh
   npm start
@@ -40,4 +30,4 @@ This application allows you to view a list of widget instances available in your
 
 ## Future Plans
 
-- Add user input for Olapic Auth key for easier maintainance.
+- Add list manager so users can store customer name + API key pairs
