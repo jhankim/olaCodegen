@@ -46,8 +46,8 @@ codegenControllers.controller('WidgetListCtrl', ['$scope', '$http', 'widgetListD
 	}
 ]);
 
-codegenControllers.controller('WidgetDetailCtrl', ['$scope', '$routeParams', 'AuthKeys' , 'widgetDetailData' , '$http', '$cookieStore',
-	function($scope, $routeParams, AuthKeys, widgetDetailData, $http, $cookieStore) {
+codegenControllers.controller('WidgetDetailCtrl', ['$scope', '$routeParams', 'AuthKeys' , 'widgetDetailData' , '$http', '$cookieStore', '$location',
+	function($scope, $routeParams, AuthKeys, widgetDetailData, $http, $cookieStore, $location) {
 
 		if ( !$cookieStore.get('ola_apikey') ) {
 			console.log('no cookie');
