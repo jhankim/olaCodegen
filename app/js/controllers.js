@@ -10,8 +10,6 @@ codegenControllers.controller('HomeCtrl', ['$scope', '$http', '$location','$cook
 			$cookieStore.remove('ola_apikey');
 		}
 
-		$scope.auth_apikey = "1f6da15fd360ed792faa8cc5c5c3e324f7e2cea031c1c9f020becaf8ccbe3e78";
-
 		$scope.submit = function() {
         
 		$http.get('//photorankapi-a.akamaihd.net/?auth_token=' + $scope.auth_apikey).
