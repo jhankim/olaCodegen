@@ -22,6 +22,12 @@ codegenApp.config(['$routeProvider',
 		$routeProvider.
 
 		// Widget List
+		when('/home', {
+			templateUrl: 'partials/home.html',
+			controller: 'HomeCtrl'
+		}).
+
+		// Widget List
 		when('/widgets', {
 			templateUrl: 'partials/widget-list.html',
 			controller: 'WidgetListCtrl',
@@ -57,7 +63,7 @@ codegenApp.config(['$routeProvider',
 
 		// Default
 		otherwise({
-			redirectTo: '/widgets'
+			redirectTo: '/home'
 		});
 	}
 ],

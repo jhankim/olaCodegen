@@ -3,6 +3,12 @@
 /* Controllers */
 var codegenControllers = angular.module('codegenControllers', []);
 
+codegenControllers.controller('HomeCtrl', ['$scope', '$http',
+	function ($scope, $http) {
+
+	}
+]);
+
 codegenControllers.controller('WidgetListCtrl', ['$scope', '$http', 'widgetListData', 'AuthKeys',
 	function ($scope, $http, widgetListData, AuthKeys) {
 
