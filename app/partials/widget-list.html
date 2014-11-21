@@ -25,25 +25,44 @@
 			<!--Body content-->
 			<div class="row widgets">
 
-				<div class="col-md-3" ng-repeat="widget in widgets | filter:query | orderBy:orderProp">
-
-					<div class="thumbnail">
-						<div class="img_{{widget.type}}"></div>
-						<div class="caption">
-							<h3>{{widget.name}}</h3>
-
-							<span ><strong>Type:</strong></span> <span ng-show="widget.type == 'best_photos'">All photos widget</span>
-							<span ng-show="widget.type == 'by_gallery'">Stream specific widget</span>
-							<span ng-show="widget.type == 'by_category'">Category widget</span>
-							<span ng-show="widget.type == 'by_tag'">PDP widget</span>
-							<span ng-show="widget.type == 'by_tag_category'">CDP widget</span>
-
-							<br><br>
-
-							<p><a href="#/widgets/{{widget.id}}" class="btn btn-primary" role="button">Get code + instructions</a></p>
+				<div class="col-md-12">
+					<div class="panel panel-default">
+						<!-- Default panel contents -->
+						<div class="panel-heading">
+							<h4>Widget Instances</h2>
 						</div>
-					</div>
 
+						<!-- Table -->
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>Instance ID</th>
+									<th>Instance Name</th>
+									<th>Instance Type</th>
+									<th>Instance Mode</th>
+									<th>&nbsp;</th>
+								</tr>
+							</thead>
+						
+							<tr ng-repeat="widget in widgets | filter:query | orderBy:'name'">
+								<td>{{widget.id}}</td>
+								<td><strong>{{widget.name}}</strong></td>
+								<td>
+									<span ng-show="widget.type == 'by_gallery'">Stream specific widget</span>
+									<span ng-show="widget.type == 'by_category'">Category widget</span>
+									<span ng-show="widget.type == 'by_tag'">PDP widget</span>
+									<span ng-show="widget.type == 'by_tag_category'">CDP widget</span>
+									<span ng-show="widget.type == 'best_photos'">All Photos</span>
+
+								</td>
+								<td>{{widget.settings.mode}}</td>
+								<td>
+									<a href="#/widgets/{{widget.id}}" class="btn btn-primary" role="button">Get code + instructions</a>
+								</td>
+
+							</tr>
+						</table>
+					</div>
 				</div>
 			
 			</div>
